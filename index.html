@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html  >
+<head>
+  <!-- Site made with Mobirise Website Builder v6.0.1, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v6.0.1, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo5.png" type="image/x-icon">
+  <meta name="description" content="">
+  
+  
+  <title>Home</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=huuHTA"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=huuHTA" type="text/css">
+
+  
+  
+  
+</head>
+<body>
+  
+  <div id="custom-html-0" class="cid-uN9rqFWZni" data-rv-view="57"></div><style class="cid-uN9rqFWZni" id="custom-html-0" data-rv-view="57">
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+button:hover {
+  background-color: #4c54d2;
+  transform: scale(1.02);
+}
+</style><script class="cid-uN9rqFWZni" id="custom-html-0" data-rv-view="57">
+  // Геолокационная проверка
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      // Координаты ресторана
+      const restaurantLat = 42.874772;
+      const restaurantLon = 74.612363;
+
+      const distance = Math.sqrt((lat - restaurantLat) ** 2 + (lon - restaurantLon) ** 2);
+
+      if (distance > 0.005) {
+        document.getElementById("app").innerHTML = `
+          <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:#111; color:white; font-size:20px; text-align:center; padding:30px;">
+            🔒 Доступ запрещён<br><br>Сайт работает только в ресторане.
+          </div>
+        `;
+      } else {
+        showLoginForm();
+      }
+    },
+    function (error) {
+      document.getElementById("app").innerHTML = `
+        <div style="display:flex; justify-content:center; align-items:center; height:100vh; background:#111; color:white; font-size:20px; text-align:center;">
+          ⚠️ Разрешите доступ к геолокации, чтобы войти на сайт.
+        </div>
+      `;
+    }
+  );
+
+  // Логика логина
+  function showLoginForm() {
+    document.getElementById("app").innerHTML = `
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3a0ca3, #7209b7); font-family: 'Segoe UI', sans-serif;">
+      <div style="width: 100%; max-width: 400px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 12px 25px rgba(0,0,0,0.3); animation: fadeIn 0.6s ease;">
+        
+        <h2 style="text-align:center; color:#333; margin-bottom: 5px;"><b>OCL Link</b></h2>
+        <p style="text-align:center; margin-top: 0; color:#777; font-size: 15px;">Вход в ресторан</p>
+        
+        <div style="position: relative;">
+          <input type="text" id="username" placeholder="Логин" style="width:100%; padding:12px 40px 12px 12px; margin:10px 0; border-radius:10px; border:1px solid #ccc;">
+          <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#888;">👤</span>
+        </div>
+
+        <div style="position: relative;">
+          <input type="password" id="password" placeholder="Пароль" style="width:100%; padding:12px 40px 12px 12px; margin:10px 0; border-radius:10px; border:1px solid #ccc;">
+          <span style="position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#888;">🔒</span>
+        </div>
+
+        <button onclick="login()" style="width:100%; padding:12px; background-color:#5a67d8; color:white; border:none; border-radius:10px; font-size:16px; cursor:pointer; transition: 0.3s;">Войти</button>
+
+        <p id="error" style="color:#d32f2f; margin-top:10px; text-align:center; font-size:14px;"></p>
+      </div>
+    </div>
+    `;
+  }
+
+  const users = {
+    "tp": { password: "tp2025", redirect: "vhod.html" },
+    "okt": { password: "pass111", redirect: "restaurant2.html" },
+    "azm": { password: "pass222", redirect: "restaurant2.html" },
+    "gor": { password: "pass333", redirect: "restaurant2.html" },
+    "ges": { password: "pass444", redirect: "restaurant2.html" },
+    "don": { password: "pass555", redirect: "restaurant2.html" },
+    "admin": { password: "tp280822!", redirect: "page2.html" }
+  };
+
+  function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorElem = document.getElementById("error");
+
+    if (users[username] && users[username].password === password) {
+      window.location.href = users[username].redirect;
+    } else {
+      errorElem.innerText = "⛔ Неверный логин или пароль.";
+    }
+  }
+</script><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/offline-website-builder.html">Offline Website Maker</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/theme/js/script.js"></script>  
+  
+  
+</body>
+</html>

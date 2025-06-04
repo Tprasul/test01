@@ -1,0 +1,78 @@
+{
+  "settings": {
+    "name": "Site 2025-06-04 17:38",
+    "currentPage": "index.html",
+    "theme": {
+      "name": "startm5",
+      "title": "StartM5",
+      "titlePreset": "StartM5",
+      "styling": {
+        "backgroundColor": "#ffffff",
+        "primaryColor": "#9fe870",
+        "secondaryColor": "#ffd7ef",
+        "successColor": "#3a341c",
+        "infoColor": "#320707",
+        "warningColor": "#a0e2e1",
+        "dangerColor": "#ffea64",
+        "mainFont": "Inter Tight",
+        "display1Font": "Inter Tight",
+        "display1Size": 5,
+        "display2Font": "Inter Tight",
+        "display2Size": 4,
+        "display5Font": "Inter Tight",
+        "display5Size": 2,
+        "display7Font": "Inter Tight",
+        "display7Size": 1.4,
+        "display4Font": "Inter Tight",
+        "display4Size": 1.4,
+        "isRoundedImages": true,
+        "isRoundedButtons": true,
+        "isLargeButtons": true,
+        "isGhostButtonBorder": true,
+        "underlinedLinks": false,
+        "isAnimatedOnScroll": false,
+        "isScrollToTopButton": false
+      }
+    },
+    "path": "@PROJECT_PATH@",
+    "versionFirst": "6.0.1",
+    "siteFonts": [
+      {
+        "css": "'Inter Tight', sans-serif",
+        "name": "Inter Tight",
+        "url": "https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i"
+      }
+    ],
+    "uniqCompNum": 1,
+    "versionPublish": "6.0.1",
+    "screenshot": "screenshot.png"
+  },
+  "pages": {
+    "index.html": {
+      "settings": {
+        "main": true,
+        "title": "Home",
+        "meta_descr": "",
+        "header_custom": "",
+        "footer_custom": "",
+        "html_before": ""
+      },
+      "components": [
+        {
+          "alias": "deltapi-code-editor",
+          "_isSecondary": true,
+          "_styles": {},
+          "_name": "custom-html",
+          "_sourceTheme": "startm5",
+          "_customHTML": "<!-- Контейнер -->\r\n<div id=\"app\"></div>\r\n\r\n<!-- Анимация -->\r\n<style>\r\n@keyframes fadeIn {\r\n  from { opacity: 0; transform: translateY(20px); }\r\n  to { opacity: 1; transform: translateY(0); }\r\n}\r\nbutton:hover {\r\n  background-color: #4c54d2;\r\n  transform: scale(1.02);\r\n}\r\n</style>\r\n\r\n<!-- Скрипт -->\r\n<script>\r\n  // Геолокационная проверка\r\n  navigator.geolocation.getCurrentPosition(\r\n    function (position) {\r\n      const lat = position.coords.latitude;\r\n      const lon = position.coords.longitude;\r\n\r\n      // Координаты ресторана\r\n      const restaurantLat = 42.874772;\r\n      const restaurantLon = 74.612363;\r\n\r\n      const distance = Math.sqrt((lat - restaurantLat) ** 2 + (lon - restaurantLon) ** 2);\r\n\r\n      if (distance > 0.005) {\r\n        document.getElementById(\"app\").innerHTML = `\r\n          <div style=\"display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; background:#111; color:white; font-size:20px; text-align:center; padding:30px;\">\r\n            🔒 Доступ запрещён<br><br>Сайт работает только в ресторане.\r\n          </div>\r\n        `;\r\n      } else {\r\n        showLoginForm();\r\n      }\r\n    },\r\n    function (error) {\r\n      document.getElementById(\"app\").innerHTML = `\r\n        <div style=\"display:flex; justify-content:center; align-items:center; height:100vh; background:#111; color:white; font-size:20px; text-align:center;\">\r\n          ⚠️ Разрешите доступ к геолокации, чтобы войти на сайт.\r\n        </div>\r\n      `;\r\n    }\r\n  );\r\n\r\n  // Логика логина\r\n  function showLoginForm() {\r\n    document.getElementById(\"app\").innerHTML = `\r\n    <div style=\"min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3a0ca3, #7209b7); font-family: 'Segoe UI', sans-serif;\">\r\n      <div style=\"width: 100%; max-width: 400px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 12px 25px rgba(0,0,0,0.3); animation: fadeIn 0.6s ease;\">\r\n        \r\n        <h2 style=\"text-align:center; color:#333; margin-bottom: 5px;\"><b>OCL Link</b></h2>\r\n        <p style=\"text-align:center; margin-top: 0; color:#777; font-size: 15px;\">Вход в ресторан</p>\r\n        \r\n        <div style=\"position: relative;\">\r\n          <input type=\"text\" id=\"username\" placeholder=\"Логин\" style=\"width:100%; padding:12px 40px 12px 12px; margin:10px 0; border-radius:10px; border:1px solid #ccc;\">\r\n          <span style=\"position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#888;\">👤</span>\r\n        </div>\r\n\r\n        <div style=\"position: relative;\">\r\n          <input type=\"password\" id=\"password\" placeholder=\"Пароль\" style=\"width:100%; padding:12px 40px 12px 12px; margin:10px 0; border-radius:10px; border:1px solid #ccc;\">\r\n          <span style=\"position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#888;\">🔒</span>\r\n        </div>\r\n\r\n        <button onclick=\"login()\" style=\"width:100%; padding:12px; background-color:#5a67d8; color:white; border:none; border-radius:10px; font-size:16px; cursor:pointer; transition: 0.3s;\">Войти</button>\r\n\r\n        <p id=\"error\" style=\"color:#d32f2f; margin-top:10px; text-align:center; font-size:14px;\"></p>\r\n      </div>\r\n    </div>\r\n    `;\r\n  }\r\n\r\n  const users = {\r\n    \"tp\": { password: \"tp2025\", redirect: \"vhod.html\" },\r\n    \"okt\": { password: \"pass111\", redirect: \"restaurant2.html\" },\r\n    \"azm\": { password: \"pass222\", redirect: \"restaurant2.html\" },\r\n    \"gor\": { password: \"pass333\", redirect: \"restaurant2.html\" },\r\n    \"ges\": { password: \"pass444\", redirect: \"restaurant2.html\" },\r\n    \"don\": { password: \"pass555\", redirect: \"restaurant2.html\" },\r\n    \"admin\": { password: \"tp280822!\", redirect: \"page2.html\" }\r\n  };\r\n\r\n  function login() {\r\n    const username = document.getElementById(\"username\").value.trim();\r\n    const password = document.getElementById(\"password\").value.trim();\r\n    const errorElem = document.getElementById(\"error\");\r\n\r\n    if (users[username] && users[username].password === password) {\r\n      window.location.href = users[username].redirect;\r\n    } else {\r\n      errorElem.innerText = \"⛔ Неверный логин или пароль.\";\r\n    }\r\n  }\r\n</script>\r\n",
+          "_cid": "uN9rqFWZni",
+          "_anchor": "custom-html-0",
+          "_protectedParams": [],
+          "_global": false,
+          "_once": false,
+          "_params": {}
+        }
+      ]
+    }
+  }
+}
